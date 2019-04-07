@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cfh.dao.StudentMapper">
+    <resultMap id="BaseResultMap" type="com.cfh.entity.Student">
+        <id column="sno" property="sno" jdbcType="INTEGER"/>
+        <result column="sname" property="sname" jdbcType="VARCHAR"/>
+        <result column="score" property="score" jdbcType="DOUBLE"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    sno, sname, score
+    </sql>
+
+
+    <select id="getAllStudent" resultType="com.cfh.entity.Student">
+      select * from student
+    </select>
+    
+    <insert id="insertStudent" parameterType="com.cfh.entity.Student" >
+        insert into student(sno,sname,score) values(#{sno}, #{sname},#{score})
+    </insert>
+    
+    <select id="getStudentByID" parameterType="int" resultType="com.cfh.entity.Student">
+        select * from student where sno = #{sno}
+    </select>
+
+    <delete id="deleteByID" parameterType="int">
+      delete  from student where sno = #{sno}
+    </delete>
+
+    <update id="updateByID" parameterType="com.cfh.entity.Student">
+        update student set sname = #{sname}, score = #{score} where sno = #{sno}
+    </update>
+</mapper>
